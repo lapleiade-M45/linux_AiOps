@@ -3,11 +3,11 @@ from serveur_out import *
 from serveur_log import *
 
 def main():
-
     #run_serveur_in();
-    if(llama_get_health()):
+    if(llama_get_health() == None):
+        print("Erreur connection au serveur")
         return(1);
     
-    simple_completion("redige un article sur la phiqie quantique, en particulier usr l'intrication quantique")
+    #simple_completion("redige un article sur la phiqie quantique, en particulier usr l'intrication quantique")
 
 main()

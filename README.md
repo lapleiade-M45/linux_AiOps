@@ -32,4 +32,10 @@ cmake -B build && cmake --build build
 
 # python server
 
- 
+
+Il existe de nombreux parametre pour le lancement de llama.cpp en mode serveur.
+L'objectif a terme est de maitriser toute la chaine d'inference sur les modeles. 
+
+Ici des parametre de base.
+
+./llama-server --port 8080 -ngl 99 -m /data/iamedia/models/gguf_models/gpt-oss-20b-GGUF/gpt-oss-20b-F16.gguf --context-shift  --flash-attn 1 --reasoning-budget -0 --offline'

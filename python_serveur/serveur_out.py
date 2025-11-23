@@ -9,9 +9,8 @@ def server_caller(funct, ip, port, endpoint, header, data, methode):
         elif(methode == 1):
             print("start post")
             r = requests.post(f'{ip}:{port}/{endpoint}', headers=header, data=data);
-        funct(r)
+        return funct(r)
     except OSError as err:
-        print("Erreur ", err.errno);
         return(err.errno);
 
 
@@ -19,7 +18,7 @@ def print_health(res):
     print("start")
     if(res.status_code == 200):
         print("Connection llama.cpp ok");
-    return(1);
+    return(0);
 
 def print_reponse_json(res):
     if(res.status_code == 200):
@@ -29,13 +28,14 @@ def print_reponse_json(res):
 
 
 
-def llama_get_health():
+def llama_get_health() -> int:
 
     header = {"Content-Type": "application/json"};
     address = 'http://127.0.0.1';
     port = "8080";
     endpoint = 'v1/health';
     r = server_caller(print_health,address,port,endpoint, header, None, 0);
+    return(r)
 
 
 def simple_completion(input):
@@ -50,7 +50,8 @@ def simple_completion(input):
             # {"role": "user", "content": "hello"}
             {"role": "system", "content": "Tu est le meilleur professeur de chimie de l'université de fribourg"},
             {"role": "user", "content": "Fait moi un cour sur la sinthese du paracetamole"}
-        ]
+        ],
+        "stream": "true"
     }
     j = json.dumps(payload)
 
